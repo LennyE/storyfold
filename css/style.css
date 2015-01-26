@@ -12,7 +12,7 @@ body{
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 60px;
-        background-color: rgba(255,0,0,0.1);
+        background-color: rgba(255,0,0,0.0);
         padding:10px;
        
 }
@@ -21,7 +21,7 @@ body{
 .allow-formatting {
     position:relative;
     display:inline-block;
-    margin:20px 0px 50px 0px;
+/*     margin:20px 0px 10px 0px; */
     min-height:200px;
     border:0px hidden transparent;
     outline:none;
@@ -54,7 +54,28 @@ body{
 }
 
 #content-submit{
+/*
 	visibility: hidden;
 	display: none;
+*/
+
+    position:relative;
+    display:inline-block;
+    margin:20px 0px 12px 0px;
+    min-height:200px;
+    border:0px hidden transparent;
+    outline:none;
+	color:#222!important;
+	overflow: hidden;
+	
+    width: 100%;
+/*     min-height: 2em; */
+        background-color: rgba(0,255,0,0.1);
+    font-size: 14px;
+    line-height: 28px;
+    outline: 0;
+/*     margin: 10px; */
+resize: none;
+
 }
 
