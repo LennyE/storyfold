@@ -12,6 +12,9 @@ body{
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 60px;
+        background-color: rgba(255,0,0,0.1);
+        padding:10px;
+       
 }
 
 .no-formatting,
@@ -23,34 +26,35 @@ body{
     border:0px hidden transparent;
     outline:none;
 	color:#222!important;
+	overflow: hidden;
 	
     width: 100%;
-    min-height: 5em;
-    overflow: auto;
-        background-color: rgba(255,0,0,0.1);
+/*     min-height: 2em; */
+        background-color: rgba(0,255,0,0.1);
     font-size: 14px;
     line-height: 28px;
     outline: 0;
+/*     margin: 10px; */
         
-    overflow: auto;
-    padding: 12px;
 }
 
 
 
+#textcontent {
+}
 
+#textcontent[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #555; 
+    cursor: text;
+}
 
+#textcontent[placeholder]:empty:focus:before {
+    content: "";
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+#content-submit{
+	visibility: hidden;
+	display: none;
+}
 
