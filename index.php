@@ -1,6 +1,6 @@
 <?php
-//egentligen bör detta vara ett sessionid som skapas dynamiskt, använder statiskt för testsyfte.
-$sessionid = "123testID";
+session_start();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,24 +19,31 @@ $sessionid = "123testID";
 	<!-- polling -->	
     <script src="js/jquery-1.11.2.js"></script>
     <script src="js/sizzle.js"></script>
-    <script src="js/client.js"></script>
+<!--     <script src="js/client.js"></script> -->
 
 
 </head>
 <body>
-        <h1>Response from server:</h1>
-        <div id="response">&nbsp;</div>
-<hr>
-<?php echo($sessionid) ?>
+<!-- <?php echo($_SESSION['filnamn']); ?> -->
+<br>
 
 <div id="results">
 
-	<?php include('data.php'); ?>
+        <h1>Storyfold!</h1>
+<!--         <div id="response">&nbsp;</div> -->
+
+
+	<?php include('data.php');
+		
+		
+	?>
+	
+	
 
 	<!-- using a div contenteditable because of the div's layout properties -->
 <!-- 	<div id="textcontent" contenteditable="true" class="no-formatting" placeholder="Add your part of the story!"></div> -->
 
-	<form id="form" action="index.php" method="post" onsubmit="return getContent()">
+	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$_SESSION['id']; ?>" method="post" onsubmit="return getContent()">
 		<textarea id="content-submit" name="content-submit" class="no-formatting" type="text" placeholder="textfield for submitting textcontent"></textarea>
 		<input type="submit" name="submit" value="Send" />
 	</form>

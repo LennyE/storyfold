@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 
 /**
  * Server-side file.
@@ -15,8 +17,8 @@
 // set php runtime to unlimited
 set_time_limit(0);
 
-// where does the data come from ? In real world this would be a SQL query or something
-$data_source_file = 'stories/123testID.txt';
+/* $data_source_file = 'stories/film.txt'; */
+$data_source_file = 'stories/'. $_SESSION['id'] .'.txt';
 
 // main loop
 while (true) {
@@ -47,8 +49,10 @@ while (true) {
 
         // leave this loop step
         break;
-
-    } else {
+    }
+    
+    
+    else {
         // wait for 1 sec (not very sexy as this blocks the PHP/Apache process, but that's how it goes)
         sleep( 1 );
         continue;
