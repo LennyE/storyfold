@@ -1,55 +1,42 @@
 <?php
 
-//THIS FILE NEEDS CLEANING!
-
-/* session_start(); */
-$_SESSION['id'] = $_GET['id'];
-
-
 // convert potential malicious characters to html
 $textcontent = htmlspecialchars($_POST["content-submit"]);
 
-$filepath = 'stories/'. $_SESSION['id'] .'.txt';
+$filepath = 'stories/'.$id.'.txt';
 
 
-
-/* if(isset($_GET["id"]) && strlen($_SESSION['id']) = 7)) { */
-
-if (isset($_GET["id"])){
-   $_SESSION['id'] = $_GET['id'];
-}
-else{
-	$_SESSION['id'] = substr( md5(rand()), 0, 7);
-}
-echo ('<a href=index.php?id='.$_SESSION['id'].'>id: '.$_SESSION['id'].'</a><hr>');
+echo ('<a href="index.php">Start new</a> | ');
+echo ('<a href="index.php?id='.$id.'">current id: '.$id.'</a><hr>');
 /* print_r($_SESSION); */
 
 
-echo ('Try to read file:<br>');
-
-
+// check if $id is 7 char
 if( strlen($id) == 7 ){
 
 	// only write to file if there is any text to save
 	if (strlen($textcontent) > 0) {
 	
 		$fp = fopen($filepath, 'a+');
-		
 		fwrite($fp, $textcontent);
-		
 		fclose($fp);
 	}
-	
 	else{
-	// add something
+	// do nothing
 	}
 
-		
 		if (file_exists($filepath)) {
-		    echo ('The file '.$_SESSION['id'].' exist!<br>');
+		    echo ('The file '.$id.' exist!<br>');
 		}
 		else {
 		    echo ('The file '.$id.' does not exist<br>');
+		    
+		    // create a temporary file that will make it possible to auto-poll the initial submit by a player
+			$temp = tmpfile();
+			fwrite($temp, $textcontent);
+			fseek($temp, 0);
+			echo fread($temp, 1024);
+			fclose($temp); // this removes the file
 		}	
 			
 }
@@ -58,19 +45,15 @@ else {
     echo ('Oh you! That\'s an invalid file id. ');
     $idlength = strlen($id);
     echo ('['.$idlength.']');
-
 }	
-
 
 	echo ('
 		<script>
 		$(function replaceUrl() {
-			/* add $id variable to url with replaceState on page load iframe onload */
-	    	history.replaceState("object or string", "title", "index.php?id='.$_SESSION['id'].'");
+			/* add $id variable to url with replaceState upon loading data.php */
+	    	history.replaceState("object or string", "title", "index.php?id='.$id.'");
 		});
 		</script>
 	');
-
-
-
+	
 ?>

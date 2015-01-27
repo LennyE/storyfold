@@ -7,9 +7,7 @@ if (isset($_GET['id'])) {
         $id = substr( md5(rand()), 0, 7); 
     }
     
-/* $value = 'test'; */
 setcookie("currentID", $id, time()+7200);
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,26 +39,25 @@ setcookie("currentID", $id, time()+7200);
 <div id="results">
 
         <h1>Storyfold!</h1>
-        <span style="font-weight:bold">Story autoupdates below</span><br>
-        <div id="response">&nbsp;</div>
 		<hr>
 
-	<?php include('data.php');
-		
-		
-	?>
+	<?php include('data.php');?>
 	
-	
+	<hr>
+	    
+    <div id="response">Start writing your story!</div>
 
-	<!-- using a div contenteditable because of the div's layout properties -->
+	
+		<!-- using a div contenteditable because of the div's layout properties -->
 <!-- 	<div id="textcontent" contenteditable="true" class="no-formatting" placeholder="Add your part of the story!"></div> -->
 
 <!-- 	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$_SESSION['id']; ?>" method="post" onsubmit="return getContent()"> -->
-	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$_SESSION['id']; ?>" method="post">
+<!-- 	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$id; ?>" method="post"> -->
+	<form id="form" method="post">
 		<textarea id="content-submit" name="content-submit" class="no-formatting" type="text" placeholder="textfield for submitting textcontent"></textarea>
 		<input type="submit" name="submit" value="Send" />
 	</form>
-	<br>Storyfold stoppar kakor i din dator.
+	<br>Storyfold bakar kakor i din dator.
 </div>
 </body>
 </html>

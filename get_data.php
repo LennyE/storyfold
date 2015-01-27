@@ -1,12 +1,12 @@
 <?php
 
 /* echo $_COOKIE["TestCookie"]; */
-$qwe = $_COOKIE["currentID"];
+$id = $_COOKIE["currentID"];
 /* $qwe = 'test'; */
 
   
 /*   $file = dirname(__FILE__).'stories/'.$qwe.'.txt'; */
-  $file = 'stories/'. $qwe .'.txt';
+  $file = 'stories/'. $id .'.txt';
   $lastmodif = isset($_GET['timestamp']) ? $_GET['timestamp'] : 0;
   $currentmodif = filemtime($file);
   
