@@ -1,5 +1,14 @@
 <?php
-session_start();
+if (isset($_GET['id'])) {
+        $id = $_GET['id']; 
+    } 
+    else{ 
+    	// if no ?variable=value is provided in the url, use a random value
+        $id = substr( md5(rand()), 0, 7); 
+    }
+    
+/* $value = 'test'; */
+setcookie("currentID", $id, time()+7200);
 
 ?>
 <!DOCTYPE html>
@@ -18,8 +27,10 @@ session_start();
 
 	<!-- polling -->	
     <script src="js/jquery-1.11.2.js"></script>
-    <script src="js/sizzle.js"></script>
-<!--     <script src="js/client.js"></script> -->
+<!-- 	  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> -->
+	  <script src="js/jQuery.longpolling.js"></script>
+	  <script src="js/application.js"></script>
+
 
 
 </head>
@@ -30,8 +41,9 @@ session_start();
 <div id="results">
 
         <h1>Storyfold!</h1>
-<!--         <div id="response">&nbsp;</div> -->
-
+        <span style="font-weight:bold">Story autoupdates below</span><br>
+        <div id="response">&nbsp;</div>
+		<hr>
 
 	<?php include('data.php');
 		
@@ -43,13 +55,13 @@ session_start();
 	<!-- using a div contenteditable because of the div's layout properties -->
 <!-- 	<div id="textcontent" contenteditable="true" class="no-formatting" placeholder="Add your part of the story!"></div> -->
 
-	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$_SESSION['id']; ?>" method="post" onsubmit="return getContent()">
+<!-- 	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$_SESSION['id']; ?>" method="post" onsubmit="return getContent()"> -->
+	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$_SESSION['id']; ?>" method="post">
 		<textarea id="content-submit" name="content-submit" class="no-formatting" type="text" placeholder="textfield for submitting textcontent"></textarea>
 		<input type="submit" name="submit" value="Send" />
 	</form>
-
+	<br>Storyfold stoppar kakor i din dator.
 </div>
-
 </body>
 </html>
 

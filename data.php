@@ -1,5 +1,8 @@
 <?php
-session_start();
+
+//THIS FILE NEEDS CLEANING!
+
+/* session_start(); */
 $_SESSION['id'] = $_GET['id'];
 
 
@@ -25,7 +28,7 @@ echo ('<a href=index.php?id='.$_SESSION['id'].'>id: '.$_SESSION['id'].'</a><hr>'
 echo ('Try to read file:<br>');
 
 
-if( strlen($_SESSION['id']) == 7 ){
+if( strlen($id) == 7 ){
 
 	// only write to file if there is any text to save
 	if (strlen($textcontent) > 0) {
@@ -44,17 +47,16 @@ if( strlen($_SESSION['id']) == 7 ){
 		
 		if (file_exists($filepath)) {
 		    echo ('The file '.$_SESSION['id'].' exist!<br>');
-			readfile($filepath);
 		}
 		else {
-		    echo ('The file '.$_SESSION['id'].' does not exist<br>');
+		    echo ('The file '.$id.' does not exist<br>');
 		}	
 			
 }
 
 else {
     echo ('Oh you! That\'s an invalid file id. ');
-    $idlength = strlen($_SESSION['id']);
+    $idlength = strlen($id);
     echo ('['.$idlength.']');
 
 }	
