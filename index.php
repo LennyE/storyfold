@@ -30,7 +30,6 @@ setcookie("currentID", $id, time()+7200);
 	  <script src="js/application.js"></script>
 
 
-
 </head>
 <body>
 <!-- <?php echo($_SESSION['filnamn']); ?> -->
@@ -46,7 +45,16 @@ setcookie("currentID", $id, time()+7200);
 	<hr>
 	    
     <div id="response">Start writing your story!</div>
-
+    
+	<audio id="notificationsound" src="sound/notify.mp3" preload="auto"></audio>
+<!--
+	<a href="javascript:play_single_sound();">Play 5-sec sound on single channel</a>
+	<script type="text/javascript">
+	function play_single_sound() {
+		document.getElementById('audiotag1').play();
+	}
+	</script>
+-->
 	
 		<!-- using a div contenteditable because of the div's layout properties -->
 <!-- 	<div id="textcontent" contenteditable="true" class="no-formatting" placeholder="Add your part of the story!"></div> -->

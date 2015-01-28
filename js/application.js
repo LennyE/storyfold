@@ -11,8 +11,8 @@ $(function(){
 function pollSuccess(data, textStatus, jqXHR){
   var json = eval('(' + data + ')');
   $('#response').html(json['data']);
-/*   $('#response').html(obj.data_from_file); */
-  console.log('filen uppdaterades');
+	document.getElementById('notificationsound').play();
+  	console.log('fi/Volumes/Macintosh%20HD/Users/Lenny/Sites/storyfold/js/application.jslen uppdaterades');
 /*   alert('filen uppdaterades'); */
 
 }
