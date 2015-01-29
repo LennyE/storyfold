@@ -23,6 +23,24 @@ setcookie("currentID", $id, time()+7200);
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
 		
 
+
+<script>
+window.onload = function(){
+	document.getElementById('notificationsound').muted = true;
+	document.title="focus";
+};
+
+window.onblur = function() {
+	document.getElementById('notificationsound').muted = false;
+	document.title="blur";
+};
+
+window.onfocus = function() {
+	document.getElementById('notificationsound').muted = true;
+	document.title="focus";
+};
+</script>
+
 	<!-- polling -->	
     <script src="js/jquery-1.11.2.js"></script>
 <!-- 	  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> -->
@@ -32,7 +50,6 @@ setcookie("currentID", $id, time()+7200);
 
 </head>
 <body>
-<!-- <?php echo($_SESSION['filnamn']); ?> -->
 <br>
 
 <div id="results">
