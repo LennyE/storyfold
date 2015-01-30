@@ -1,6 +1,33 @@
 <?php
 if (isset($_GET['id'])) {
         $id = $_GET['id']; 
+        setcookie("currentID", $id, time()+7200); 
+        	$test = 'hämtar & sätter ny cookie från url-variabel ID';
+
+    } 
+	elseif (isset($_COOKIE['currentID'])) {
+	        $id = $_COOKIE['currentID'];
+	        setcookie("currentID", $id, time()+7200); 
+	        	$test = 'använder nuvarande cookie-ID';
+ 
+		}
+		else{ 
+			// if no ?variable=value is provided in the url, use a random value
+		    $id = substr( md5(rand()), 0, 7); 
+			setcookie("currentID", $id, time()+7200); 
+				$test = 'Varken cookie eller url-variabel fanns att hämta, ett nytt ID genererades';
+
+		}
+
+// cookie debug
+echo ('cookie '.$_COOKIE[currentID].'<br>');
+echo ('$id '.$id.'<br>');
+echo (''.$test.'<br>');
+
+/*
+// originallösningen, vilken skapar problem om man försöker köra två sessioner simultant (cookien skrivs över och get_data.php (bland annat) ballar ur)
+if (isset($_GET['id'])) {
+        $id = $_GET['id']; 
     } 
     else{ 
     	// if no ?variable=value is provided in the url, use a random value
@@ -8,6 +35,18 @@ if (isset($_GET['id'])) {
     }
     
 setcookie("currentID", $id, time()+7200);
+*/
+
+/*
+// create unique cookie for each session (2hrs)
+//// fungerar INTE eftersom get_data.php inte kan ta emot en cookie med unikt namn!
+$cookiename = ('currentID-'.$id.'');
+setcookie($cookiename, $id, time()+7200);
+
+echo "Cookie '" . $cookiename . "' is set!<br>";
+echo "Value is: " . $_COOKIE[$cookiename]; //cookie-value exists, but isn't visible until after reload
+
+*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,30 +61,15 @@ setcookie("currentID", $id, time()+7200);
 	<!-- google fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
 		
-
-
-<script>
-window.onload = function(){
-	document.getElementById('notificationsound').muted = true;
-	document.title="focus";
-};
-
-window.onblur = function() {
-	document.getElementById('notificationsound').muted = false;
-	document.title="blur";
-};
-
-window.onfocus = function() {
-	document.getElementById('notificationsound').muted = true;
-	document.title="focus";
-};
-</script>
+	<!-- mute on focus -->	
+	<script src="js/tabfocus.js"></script>
 
 	<!-- polling -->	
     <script src="js/jquery-1.11.2.js"></script>
 <!-- 	  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> -->
-	  <script src="js/jQuery.longpolling.js"></script>
-	  <script src="js/application.js"></script>
+	<script src="js/jQuery.longpolling.js"></script>
+	<script src="js/application.js"></script>
+
 
 
 </head>
@@ -83,6 +107,11 @@ window.onfocus = function() {
 		<input type="submit" name="submit" value="Send" />
 	</form>
 	<br>Storyfold bakar kakor i din dator.
+	<hr>
+	<?php
+/* 		echo ('<img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=http://192.168.1.82/~lenny/storyfold/index.php?id='.$id.'"/>');*/
+		echo ('<img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=http://'.$_SERVER[HTTP_HOST].'/beta/storyfold/index.php?id='.$id.'"/>');
+	?>
 </div>
 </body>
 </html>

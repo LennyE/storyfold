@@ -4,7 +4,6 @@ $id = $_COOKIE["currentID"];
 
 $filepath = 'stories/'.$id.'.txt';
 
-
 if (file_exists($filepath)) {
 
 /*   $file = dirname(__FILE__).'stories/'.$qwe.'.txt'; */
@@ -13,7 +12,8 @@ if (file_exists($filepath)) {
   $currentmodif = filemtime($filepath);
   
   while($currentmodif <= $lastmodif){
-    usleep(10000);
+/*     usleep(10000); */
+    sleep(1);
     clearstatcache();
     $currentmodif = filemtime($filepath);
   }
@@ -21,7 +21,7 @@ if (file_exists($filepath)) {
   $response = array();
   $response['data'] = file_get_contents($filepath);
   $response['timestamp'] = $currentmodif;
-  
+
   echo json_encode($response);
   
 }
