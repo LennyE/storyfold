@@ -1,28 +1,5 @@
 <?php
 
-$str = "I am sam, the great manchild";
-echo ($str);
-$words = str_word_count($str, 1);
-
-/*
-$firstWords = array_slice($words, 0,5);
-$lastWords = array_slice($words, -5,5);
-*/
-
-print_r($firstWords);
-print_r($lastWords);
-
-echo ('<br>');
-
-/* echo $lastWords[4]; */
-$first = join(" ", array_slice($words, 0, 5));
-$last = join(" ", array_slice($words, -5, 5));
-echo($first);
-echo ('<br>');
-echo($last);
-
-echo ('<hr>');
-
 // convert potential malicious characters to html
 $textcontent = htmlspecialchars($_POST["content-submit"]);
 

@@ -18,8 +18,15 @@ if (file_exists($filepath)) {
     $currentmodif = filemtime($filepath);
   }
   
+	// Get last five words of .txt file  
+	$str = file_get_contents($filepath);
+	$words = explode(' ', $str);
+	//$first = join(" ", array_slice($words, 0, 5));
+	$last = join(" ", array_slice($words, -5, 5));
+
   $response = array();
-  $response['data'] = file_get_contents($filepath);
+/*   $response['data'] = file_get_contents($filepath); */
+  $response['data'] = $last;
   $response['timestamp'] = $currentmodif;
 
   echo json_encode($response);

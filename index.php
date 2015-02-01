@@ -23,30 +23,6 @@ if (isset($_GET['id'])) {
 echo ('cookie '.$_COOKIE[currentID].'<br>');
 echo ('$id '.$id.'<br>');
 echo (''.$test.'<br>');
-
-/*
-// originallösningen, vilken skapar problem om man försöker köra två sessioner simultant (cookien skrivs över och get_data.php (bland annat) ballar ur)
-if (isset($_GET['id'])) {
-        $id = $_GET['id']; 
-    } 
-    else{ 
-    	// if no ?variable=value is provided in the url, use a random value
-        $id = substr( md5(rand()), 0, 7); 
-    }
-    
-setcookie("currentID", $id, time()+7200);
-*/
-
-/*
-// create unique cookie for each session (2hrs)
-//// fungerar INTE eftersom get_data.php inte kan ta emot en cookie med unikt namn!
-$cookiename = ('currentID-'.$id.'');
-setcookie($cookiename, $id, time()+7200);
-
-echo "Cookie '" . $cookiename . "' is set!<br>";
-echo "Value is: " . $_COOKIE[$cookiename]; //cookie-value exists, but isn't visible until after reload
-
-*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -88,14 +64,6 @@ echo "Value is: " . $_COOKIE[$cookiename]; //cookie-value exists, but isn't visi
     <div id="response">Start writing your story!</div>
     
 	<audio id="notificationsound" src="sound/notify.mp3" preload="auto"></audio>
-<!--
-	<a href="javascript:play_single_sound();">Play 5-sec sound on single channel</a>
-	<script type="text/javascript">
-	function play_single_sound() {
-		document.getElementById('audiotag1').play();
-	}
-	</script>
--->
 	
 		<!-- using a div contenteditable because of the div's layout properties -->
 <!-- 	<div id="textcontent" contenteditable="true" class="no-formatting" placeholder="Add your part of the story!"></div> -->
