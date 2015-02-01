@@ -6,8 +6,6 @@ $filepath = 'stories/'.$id.'.txt';
 
 if (file_exists($filepath)) {
 
-/*   $file = dirname(__FILE__).'stories/'.$qwe.'.txt'; */
-/*   $file = 'stories/'. $id .'.txt'; */
   $lastmodif = isset($_GET['timestamp']) ? $_GET['timestamp'] : 0;
   $currentmodif = filemtime($filepath);
   
@@ -19,14 +17,15 @@ if (file_exists($filepath)) {
   }
   
 	// Get last five words of .txt file  
-	$str = file_get_contents($filepath);
-	$words = explode(' ', $str);
-	//$first = join(" ", array_slice($words, 0, 5));
-	$last = join(" ", array_slice($words, -5, 5));
+	$filecontent = file_get_contents($filepath);
+	/* $code = ('This is a test to see what happens'); */
+	/* $code = ('ett två tre fyra fem sex sju'); */
+	$filecontent_exploded = explode(' ', $filecontent);
+	$lastfive = join(" ", array_slice($filecontent_exploded, -5, 5));
 
   $response = array();
 /*   $response['data'] = file_get_contents($filepath); */
-  $response['data'] = $last;
+  $response['data'] = $lastfive;
   $response['timestamp'] = $currentmodif;
 
   echo json_encode($response);

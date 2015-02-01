@@ -23,6 +23,7 @@ if (isset($_GET['id'])) {
 echo ('cookie '.$_COOKIE[currentID].'<br>');
 echo ('$id '.$id.'<br>');
 echo (''.$test.'<br>');
+echo $_SERVER[PHP_SELF];
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,11 +55,11 @@ echo (''.$test.'<br>');
 
 <div id="results">
 
-        <h1>Storyfold!</h1>
-		<hr>
-
-	<?php include('data.php');?>
+    <h1>Storyfold!</h1>
+	<hr>
 	
+	<?php include('data.php');?>
+
 	<hr>
 	    
     <div id="response">Start writing your story!</div>
@@ -77,8 +78,12 @@ echo (''.$test.'<br>');
 	<br>Storyfold bakar kakor i din dator.
 	<hr>
 	<?php
-/* 		echo ('<img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=http://192.168.1.82/~lenny/storyfold/index.php?id='.$id.'"/>');*/
+		echo ('Share-URL:<br><strong>http://lennyekberg.se/beta/storyfold/index.php?id='.$id.'</strong><br><br>');
 		echo ('<img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=http://'.$_SERVER[HTTP_HOST].'/beta/storyfold/index.php?id='.$id.'"/>');
+		echo('<hr>');
+		echo ('Share-URL:<br><strong>http://192.168.1.82/~lenny/storyfold/index.php?id='.$id.'</strong><br><br>');
+		echo ('<img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=http://192.168.1.82/~lenny/storyfold/index.php?id='.$id.'"/>');
+
 	?>
 </div>
 </body>

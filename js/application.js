@@ -9,7 +9,8 @@ $(function(){
 });
 
 function pollSuccess(data, textStatus, jqXHR){
-  var json = eval('(' + data + ')');
+/*   var json = eval('(' + data + ')'); */
+  var json = JSON.parse(data);
   $('#response').html(json['data']);
 
 	document.getElementById('notificationsound').play();
