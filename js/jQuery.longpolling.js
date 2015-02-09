@@ -24,11 +24,14 @@
                 return false;
             }
 
-            var json = eval('(' + data + ')');
+/*             var json = eval('(' + data + ')'); */ // bad practice
+			var json = JSON.parse(data);
+
 
             settings.timestamp = json['timestamp'];
             if(settings.successFunction != null) settings.successFunction(data, textStatus, jqXHR);
             setTimeout(Poll.longpolling(), settings.pollTime);
+
           },
           error: function(jqXHR, textStatus, errorThrown){
             if(settings.errorFunction != null) settings.errorFunction(jqXHR, textStatus, errorThrown);

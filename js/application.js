@@ -9,7 +9,7 @@ $(function(){
 });
 
 function pollSuccess(data, textStatus, jqXHR){
-/*   var json = eval('(' + data + ')'); */
+/*   var json = eval('(' + data + ')'); */ // bad practice
   var json = JSON.parse(data);
   $('#response').html(json['data']);
 

@@ -31,6 +31,9 @@ echo $_SERVER[PHP_SELF];
 
 	<meta charset="utf-8">
 	<title>Storyfold! &alpha;</title>
+	
+	<!-- tabfocus -->	
+	<script src="js/tabfocus.js"></script>
 
 	<!-- stylesheets --> 
 	<link href="css/style.css" rel="stylesheet" type="text/css" id="stl" />
@@ -38,15 +41,20 @@ echo $_SERVER[PHP_SELF];
 	<!-- google fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
 		
-	<!-- mute on focus -->	
-	<script src="js/tabfocus.js"></script>
-
 	<!-- polling -->	
     <script src="js/jquery-1.11.2.js"></script>
 <!-- 	  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> -->
 	<script src="js/jQuery.longpolling.js"></script>
 	<script src="js/application.js"></script>
 
+	<!-- no reload on submit -->	
+	<script src="js/no-reload-submit.js"></script>
+
+	<!-- autogrow textarea based on content -->	
+	<script src="js/jquery.autogrow-textarea.js"></script>
+	
+	<!-- submit on enterkey -->	
+	<script src="js/enter-submit.js"></script>
 
 
 </head>
@@ -65,16 +73,21 @@ echo $_SERVER[PHP_SELF];
     <div id="response">Start writing your story!</div>
     
 	<audio id="notificationsound" src="sound/notify.mp3" preload="auto"></audio>
-	
+
+
 		<!-- using a div contenteditable because of the div's layout properties -->
 <!-- 	<div id="textcontent" contenteditable="true" class="no-formatting" placeholder="Add your part of the story!"></div> -->
 
 <!-- 	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$_SESSION['id']; ?>" method="post" onsubmit="return getContent()"> -->
 <!-- 	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$id; ?>" method="post"> -->
-	<form id="form" method="post">
-		<textarea id="content-submit" name="content-submit" class="no-formatting" type="text" placeholder="textfield for submitting textcontent"></textarea>
-		<input type="submit" name="submit" value="Send" />
+	<form id="form" name="form" method="post">
+		<textarea id="contentsubmit" name="contentsubmit" class="no-formatting contentsubmit" type="text" placeholder="textfield for submitting textcontent"></textarea>
+		<input id="btnsubmit" type="submit" name="btnsubmit" value="Send" />
+<!-- 		<button id="qweqwe">Send 2</button> -->
 	</form>
+	
+
+	
 	<br>Storyfold bakar kakor i din dator.
 	<hr>
 	<?php

@@ -32,7 +32,28 @@ if (file_exists($filepath)) {
   
 }
 
+// if no .txt file exists (new round), send an "empty" timestamp
+// it ain't pretty, but it works
 else{
+
+  $lastmodif = isset($_GET['timestamp']) ? $_GET['timestamp'] : 0;
+  $currentmodif = filemtime($filepath);
+  
+  while($currentmodif <= $lastmodif){
+/*     usleep(10000); */
+    sleep(1);
+    clearstatcache();
+    $currentmodif = filemtime($filepath);
+  }
+
+  $response = array();
+/*   $response['data'] = file_get_contents($filepath); */
+  $response['data'] = 'none';
+  $response['timestamp'] = 'none';
+
+  echo json_encode($response);
+
+
 	// if file doesn't exist
 	echo('nada data, son.');
 }

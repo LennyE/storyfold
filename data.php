@@ -1,7 +1,7 @@
 <?php
 
 // convert potential malicious characters to html
-$textcontent = htmlspecialchars($_POST["content-submit"]);
+$textcontent = htmlspecialchars($_POST["contentsubmit"]);
 
 $filepath = 'stories/'.$id.'.txt';
 
@@ -42,13 +42,6 @@ if( strlen($id) == 7 ){
 		}
 		else {
 		    echo ('The file '.$id.' does not exist<br>');
-		    
-		    // create a temporary file that will make it possible to auto-poll the initial submit by a player
-			$temp = tmpfile();
-			fwrite($temp, $textcontent);
-			fseek($temp, 0);
-			echo fread($temp, 1024);
-			fclose($temp); // this removes the file
 		}	
 			
 }
@@ -62,7 +55,6 @@ else {
 
 	// add $id variable to url with replaceState upon loading data.php
 	//// avaktiverad för att inte trigga $_GET['id'] och även för att inte visa $id publikt för användaren
-/*
 	echo ('
 		<script>
 		$(function replaceUrl() {
@@ -70,9 +62,10 @@ else {
 		});
 		</script>
 	');	
-*/
 
 	// ugly fix in order to remove everything (index.php?id=1234567) after slash in example.com/
+	// also helps to prevent resubmission of POST data on page reload 
+/*
 	echo ('
 		<script>
 		$(function replaceUrl() {
@@ -80,8 +73,6 @@ else {
 		});
 		</script>
 	');	
-
-
+*/
 
 ?>
-
