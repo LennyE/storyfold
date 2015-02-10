@@ -21,7 +21,7 @@ if (file_exists($filepath)) {
 	/* $code = ('This is a test to see what happens'); */
 	/* $code = ('ett två tre fyra fem sex sju'); */
 	$filecontent_exploded = explode(' ', $filecontent);
-	$lastfive = join(" ", array_slice($filecontent_exploded, -5, 5));
+	$lastfive = join(" ", array_slice($filecontent_exploded, -6, 6)); // ending space will count as a word (see $correctedtext in data.php)
 
   $response = array();
 /*   $response['data'] = file_get_contents($filepath); */

@@ -9,6 +9,7 @@ $filepath = 'stories/'.$id.'.txt';
 // use a javascript button to avoid opening the new session in a new tab (prevent $id bug)
 	// skulle eventuellt kunna använda en vanlig href tillsammans med knappen
 echo ('
+	<hr>
 	<button onclick="newsession()">Start new</button> | 
 	<script>
 	function newsession() {
@@ -32,17 +33,48 @@ if( strlen($id) == 7 ){
 		$fp = fopen($filepath, 'a+');
 		fwrite($fp, $textcontent);
 		fclose($fp);
+
+
+	// open again and correct any errors in formatting of text
+		$fp_correcting = fopen($filepath, 'r+');
+		
+		$filecontent = file_get_contents($filepath);
+		
+		// corrects any unwanted formatting, also adds a space to the end of the string (if a space already is present that will be corrected upon next submit)
+		$filecontent = preg_replace( '/(?<!\d)[.,!?](?![.,!?\d])/', '$0 ', $filecontent.' '); 
+
+		// corrects unwanted spacing
+		$filecontent = preg_replace('/\s\s+/', ' ', $filecontent);
+
+		// capitalize first word following a full-stop (period)
+		$filecontent = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'),$filecontent);
+ 
+/*
+		echo('<hr>corrected:<br>');
+		echo $correctedtext;
+		echo('<hr>');
+*/
+				
+		file_put_contents($filepath, ""); // clear before putting new (probably shorter lengthwise) content in it
+		
+		fwrite($fp_correcting, $filecontent);
+		fclose($fp_correcting);
+		
 	}
-	else{
+	
+	else {
 	// do nothing
 	}
 
-		if (file_exists($filepath)) {
-		    echo ('The file '.$id.' exist!<br>');
-		}
-		else {
-		    echo ('The file '.$id.' does not exist<br>');
-		}	
+
+/*
+	if (file_exists($filepath)) {
+	    echo ('The file '.$id.' exist!<br>');
+	}
+	else {
+	    echo ('The file '.$id.' does not exist<br>');
+	}	
+*/
 			
 }
 
@@ -55,6 +87,7 @@ else {
 
 	// add $id variable to url with replaceState upon loading data.php
 	//// avaktiverad för att inte trigga $_GET['id'] och även för att inte visa $id publikt för användaren
+/*
 	echo ('
 		<script>
 		$(function replaceUrl() {
@@ -62,10 +95,10 @@ else {
 		});
 		</script>
 	');	
+*/
 
 	// ugly fix in order to remove everything (index.php?id=1234567) after slash in example.com/
 	// also helps to prevent resubmission of POST data on page reload 
-/*
 	echo ('
 		<script>
 		$(function replaceUrl() {
@@ -73,6 +106,5 @@ else {
 		});
 		</script>
 	');	
-*/
 
 ?>

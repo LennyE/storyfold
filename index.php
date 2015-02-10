@@ -20,10 +20,12 @@ if (isset($_GET['id'])) {
 		}
 
 // cookie debug
+/*
 echo ('cookie '.$_COOKIE[currentID].'<br>');
 echo ('$id '.$id.'<br>');
 echo (''.$test.'<br>');
 echo $_SERVER[PHP_SELF];
+*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -64,12 +66,9 @@ echo $_SERVER[PHP_SELF];
 <div id="results">
 
     <h1>Storyfold!</h1>
-	<hr>
 	
 	<?php include('data.php');?>
 
-	<hr>
-	    
     <div id="response">Start writing your story!</div>
     
 	<audio id="notificationsound" src="sound/notify.mp3" preload="auto"></audio>
@@ -78,8 +77,6 @@ echo $_SERVER[PHP_SELF];
 		<!-- using a div contenteditable because of the div's layout properties -->
 <!-- 	<div id="textcontent" contenteditable="true" class="no-formatting" placeholder="Add your part of the story!"></div> -->
 
-<!-- 	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$_SESSION['id']; ?>" method="post" onsubmit="return getContent()"> -->
-<!-- 	<form id="form" action="<?php echo $_SERVER["PHP_SELF"] . '?id='.$id; ?>" method="post"> -->
 	<form id="form" name="form" method="post">
 		<textarea id="contentsubmit" name="contentsubmit" class="no-formatting contentsubmit" type="text" placeholder="textfield for submitting textcontent"></textarea>
 		<input id="btnsubmit" type="submit" name="btnsubmit" value="Send" />
@@ -91,12 +88,12 @@ echo $_SERVER[PHP_SELF];
 	<br>Storyfold bakar kakor i din dator.
 	<hr>
 	<?php
-		echo ('Share-URL:<br><strong>http://lennyekberg.se/beta/storyfold/index.php?id='.$id.'</strong><br><br>');
-		echo ('<img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=http://'.$_SERVER[HTTP_HOST].'/beta/storyfold/index.php?id='.$id.'"/>');
+/* 		echo ('Share-URL:<br><strong>http://lennyekberg.se/beta/storyfold/index.php?id='.$id.'</strong><br><br>'); */
+		echo ('<a href="http://lennyekberg.se/beta/storyfold/index.php?id='.$id.'"><img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=http://'.$_SERVER[HTTP_HOST].'/beta/storyfold/index.php?id='.$id.'"/></a>');
+		
 		echo('<hr>');
-		echo ('Share-URL:<br><strong>http://192.168.1.82/~lenny/storyfold/index.php?id='.$id.'</strong><br><br>');
-		echo ('<img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=http://192.168.1.82/~lenny/storyfold/index.php?id='.$id.'"/>');
-
+/* 		echo ('Share-URL:<br><strong>http://192.168.1.82/~lenny/storyfold/index.php?id='.$id.'</strong><br><br>'); */
+		echo ('<a href="http://192.168.1.82/~lenny/storyfold/index.php?id='.$id.'"><img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=http://192.168.1.82/~lenny/storyfold/index.php?id='.$id.'"/></a>');
 	?>
 </div>
 </body>
