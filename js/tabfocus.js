@@ -1,3 +1,4 @@
+
 window.onload = function(){
 	document.form.contentsubmit.focus(); // put focus on text input field onload 
 	document.getElementById('notificationsound').muted = true;
@@ -5,9 +6,11 @@ window.onload = function(){
 };
 
 
+
 window.onblur = function() {
 	document.getElementById('notificationsound').muted = false;
 	document.title="blur";
+				window.open(document.URL,"_self")
 
 /*
 		setTimeout(function(){
@@ -20,5 +23,4 @@ window.onblur = function() {
 window.onfocus = function() {
 	document.getElementById('notificationsound').muted = true;
 	document.title="focus";
-	window.location.reload(); // extra measure to prevent two tabs seemingly pointing to different currentID's // might cause double submission of data
 };

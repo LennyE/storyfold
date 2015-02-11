@@ -21,6 +21,7 @@ if (isset($_GET['id'])) {
 
 // cookie debug
 /*
+echo ('previous games array '.$_COOKIE[previousgames].'<br>'); // not in-use, only for setup purposes so far
 echo ('cookie '.$_COOKIE[currentID].'<br>');
 echo ('$id '.$id.'<br>');
 echo (''.$test.'<br>');
@@ -58,6 +59,8 @@ echo $_SERVER[PHP_SELF];
 	<!-- submit on enterkey -->	
 	<script src="js/enter-submit.js"></script>
 
+	<!-- check cookie -->	
+	<script src="js/check-cookie.js"></script>
 
 </head>
 <body>
